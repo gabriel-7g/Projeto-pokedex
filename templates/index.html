@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscar Pokémon</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='estilo.css') }}">
+    <link rel="shortcut icon" href="https://static.thenounproject.com/png/594337-200.png" type="image/x-icon">
+</head>
+<body>
+    <h1>Buscar Pokémon</h1>
+    <form method="post">
+        <input type="text" name="pokemon" placeholder="Digite o nome do Pokémon" required>
+        <button type="submit">Buscar</button>
+    </form>
+
+    {% if nome %}
+        <h2>Nome do Pokémon: {{ nome }}</h2>
+        <img src="{{ imagem }}" alt="{{ nome }}" class="pokemon-img">  <!-- Exibe a imagem -->
+        <h3>Habilidades:</h3>
+        <ul>
+            {% for habilidade in habilidades %}
+                <li>{{ habilidade }}</li>
+            {% endfor %}
+        </ul>
+    {% elif nome is none and habilidades is none and request.method == "POST" %}
+        <p>Pokémon não encontrado.</p>
+    {% endif %}
+</body>
+</html>
